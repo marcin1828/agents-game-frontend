@@ -1,9 +1,9 @@
 import React from 'react';
 import './Tile.css';
-import blueImage from './../../images/blue.jpg';
-import redImage from './../../images/red.jpg';
-import grayImage from './../../images/gray.jpg';
-import blackImage from './../../images/black.jpg';
+import blueImage from './../../assets/images/blue.jpg';
+import redImage from './../../assets/images/red.jpg';
+import grayImage from './../../assets/images/gray.jpg';
+import blackImage from './../../assets/images/black.jpg';
 
 const Tile = (props) => {
 

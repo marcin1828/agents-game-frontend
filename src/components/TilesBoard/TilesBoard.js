@@ -1,11 +1,9 @@
 import React from 'react';
-import './TilesBoard.css';
+import styles from './TilesBoard.module.scss';
 import Tile from './../Tile/Tile';
 
 
-
 class TilesBoard extends React.Component {
-
 
     getTiles() {
         const layout = {...this.props.layout};
@@ -24,8 +22,7 @@ class TilesBoard extends React.Component {
     render() {
 
         return (
-            <div className="TilesBoard">
-                <p className="token">Game token: {this.props.layout['token'] !== null ? this.props.layout['token'] : ''}</p>
+            <div className={styles.TilesBoard}>
                 {this.getTiles()}
             </div>
         );

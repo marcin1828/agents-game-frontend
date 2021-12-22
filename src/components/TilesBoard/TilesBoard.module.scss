@@ -1,0 +1,8 @@
+.TilesBoard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: calc(100% - 300px);
+    margin: 25px 20px 0 20px;
+}
+
