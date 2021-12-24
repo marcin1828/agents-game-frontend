@@ -11,7 +11,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<StartView />}/>
-        <Route path="lobby" element={<Lobby />}/>
+        <Route path="lobby/:id" element={<Lobby />}/>
         <Route path="game" element={<GameService />}>
           <Route path=":id" element={<GameService />}/>
         </Route>

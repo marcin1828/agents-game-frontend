@@ -1,25 +1,42 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styles from './StartView.module.scss';
 import logo from '../../assets/images/logo.png';
 
 const StartView = () => {
 
-    const [gameId, setGameId] = useState('');
+    const [gameId, setGameId] = useState(null);
+    const [insertedGameId, setInsertedGameId] = useState(null);
+    let navigate = useNavigate();
+
+    const createNewGame = () => {
+        fetch('http://localhost:8080/game/create')
+            .then(response => response.json())
+            .then(response => {
+                setGameId(response);
+            });
+    }
+
+    const joinToGame = () => {
+        if(insertedGameId !== null && insertedGameId.length > 0) {
+             navigate('/lobby/' + insertedGameId, { replace: true });
+        }
+    }
 
     return (
         <div className={styles.wrapper}>
+
+            {gameId ? <Navigate to={'/lobby/' + gameId} /> : ''}
+
             <img className={styles.logo} src={logo} alt='Logo Agents'/>
             <div className={styles.formGroup}>
                 <p className={styles.p}>Nowa gra</p>
-                <Link className={styles.Link} to="/game">Utwórz</Link>
+                <button className={styles.button} onClick={() => createNewGame()}>Utwórz grę</button>
             </div>
-            
             <p>Dołącz do istniejącej gry</p>
             <div>
-                {/* <label for="id">Id</label> */}
-                <input className={styles.input} type="text" id="id" name="id" placeholder="Podaj ID" onChange={(e) => setGameId(e.target.value)}/>
-                <Link className={styles.Link} to={"/game?id=" + gameId}>Dołącz</Link>
+                <input className={styles.input} type="text" placeholder="Podaj ID" onChange={(e) => setInsertedGameId(e.target.value)}/>
+                <button className={styles.button} onClick={joinToGame}>Dołącz</button>
             </div>
         </div>
     )

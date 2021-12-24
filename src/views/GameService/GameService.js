@@ -9,7 +9,6 @@ class GameService extends React.Component {
         imagesCount: 0,
         boardStatus: {},
         images: {},
-        gameExists: false,
     };
 
     componentDidMount() {
@@ -19,15 +18,6 @@ class GameService extends React.Component {
             images: images,
             imagesCount: imagesCount
         });
-        this.createNewGame();
-    }
-
-    createNewGame = () => {
-        fetch('http://localhost:8080/game/create')
-            .then(res => res.json())
-            .then(res => {
-                this.setState({boardStatus: {...res}, gameExists: true});
-            });
     }
 
     importAllImagesFromDirectory = r => {
@@ -38,11 +28,9 @@ class GameService extends React.Component {
 
     render() {
 
-        const { gameExists } = this.state;  // destrukturyzacja stanu, żeby nie musieć odwoływać się poprzez this.state
-
         return (
             <div className={styles.wrapper}>
-                <Menu /*createNewGame = {this.createNewGame}*//>
+                <Menu />
                 <TilesBoard layout={this.state.boardStatus} images={this.state.images}/>
             </div>
         )
