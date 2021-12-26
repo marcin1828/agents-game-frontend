@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Lobby.module.scss';
 import logo from '../../assets/images/logo.png';
 
 
 const Lobby = () => {
+
+    const [gameId, setGameId] = useState(null);
+
+    useEffect(() => {
+        getGameId();
+      });
+
+    
+    const getGameId = () => {
+        setGameId(window.location.pathname.slice(7));
+    }
+
+  
     return (
         <div className={styles.wrapper}>
             <img className={styles.logo} src={logo} alt='Logo Agents'/>
