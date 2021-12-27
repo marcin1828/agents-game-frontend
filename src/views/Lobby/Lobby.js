@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Lobby.module.scss';
 import logo from '../../assets/images/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 
 const Lobby = () => {
 
     const [gameId, setGameId] = useState(null);
+    let navigate = useNavigate();
 
     useEffect(() => {
         getGameId();
-      });
+    });
 
-    
     const getGameId = () => {
-        setGameId(window.location.pathname.slice(7));
+        const newGameId = window.location.pathname.slice(7);
+        fetch(`http://localhost:8080/game/${newGameId}/validate`)
+        .then(response => response.json())
+        .then(response => {
+            if(!response.valid) {
+                navigate('/', { replace: true });
+            } else {
+                setGameId(newGameId);
+            }
+        })
     }
-
   
     return (
         <div className={styles.wrapper}>

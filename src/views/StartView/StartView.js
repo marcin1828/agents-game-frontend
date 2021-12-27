@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './StartView.module.scss';
 import logo from '../../assets/images/logo.png';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }  from '@mui/material';
 
 
 const StartView = () => {
@@ -15,7 +10,6 @@ const StartView = () => {
     const [gameId, setGameId] = useState(null);
     const [insertedGameId, setInsertedGameId] = useState(null);
     const [isDialogOpen, setDialog] = useState(false);
-
     let navigate = useNavigate();
 
     const createNewGame = () => {

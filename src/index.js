@@ -8,6 +8,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 
 ReactDOM.render(
+  <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<StartView />}/>
@@ -16,6 +17,7 @@ ReactDOM.render(
           <Route path=":id" element={<GameService />}/>
         </Route>
       </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
