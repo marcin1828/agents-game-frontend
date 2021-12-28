@@ -13,7 +13,7 @@ const StartView = () => {
     let navigate = useNavigate();
 
     const createNewGame = () => {
-        fetch('http://localhost:8080/game/create')
+        fetch('http://' + window.location.hostname + ':8080/game/create')
             .then(response => response.json())
             .then(response => {
                 setGameId(response.gameId);
@@ -21,7 +21,7 @@ const StartView = () => {
     }
 
     const validateGameId = (gameId) => {
-        return fetch(`http://localhost:8080/game/${gameId}/validate`)
+        return fetch(`http://${window.location.hostname}:8080/game/${gameId}/validate`)
             .then(response => response.json());
     }
 

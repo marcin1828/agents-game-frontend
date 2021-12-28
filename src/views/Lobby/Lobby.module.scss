@@ -18,27 +18,27 @@
 }
 
 .bluePanel {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    min-width: 220px;
     margin: 10px;
     padding: 25px;
     border: 1px solid black;
     border-radius: 12px;
-    background-color: #0054a6;
-
-    .button {
-        background-color: #013c77;
-    }
+    background-color: #1e88e5; //blue[600]
 }
 
 .redPanel {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    min-width: 220px;
     margin: 10px;
     padding: 25px;
     border: 1px solid black;
     border-radius: 12px;
-    background-color: #cb2538;
-
-    .button {
-        background-color: #991b2a;
-    }
+    background-color: #e53935; //red[600]
 }
 
 .p {
@@ -53,10 +53,15 @@
     text-align: center;
 }
 
-.button {
-    color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 3px;
+.BlueButton, .RedButton{
+    margin-top: 10px !important;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.playButton {
+    margin-top: 35px;
+    width: 150px;
 }
