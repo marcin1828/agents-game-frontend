@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './StartView.module.scss';
 import logo from '../../assets/images/logo.png';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle }  from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField }  from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
 
 const StartView = () => {
@@ -35,20 +37,31 @@ const StartView = () => {
         })
     }
 
+    const RedButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(red[700]),
+        backgroundColor: red[700],
+        '&:hover': {
+          backgroundColor: red[800],
+        },
+    }));
+
     return (
         <div className={styles.wrapper}>
 
             {gameId ? <Navigate to={'/lobby/' + gameId} /> : ''}
 
             <img className={styles.logo} src={logo} alt='Logo Agents'/>
-            <div className={styles.formGroup}>
-                <p className={styles.p}>Nowa gra</p>
-                <button className={styles.button} onClick={() => createNewGame()}>Utwórz grę</button>
-            </div>
-            <p>Dołącz do istniejącej gry</p>
-            <div>
-                <input className={styles.input} type="text" placeholder="Podaj ID" onChange={(e) => setInsertedGameId(e.target.value)}/>
-                <button className={styles.button} onClick={joinToGame}>Dołącz</button>
+
+            <div className={styles.formContainer}>
+                <div className={styles.formGroup}>
+                    <p>Nowa gra</p>
+                    <RedButton onClick={() => createNewGame()}>Utwórz</RedButton>
+                </div>
+                <div className={styles.formGroup}>
+                    <p>Istniejąca gra</p>
+                    <TextField onChange={(e) => setInsertedGameId(e.target.value)} style={{width: '140px', marginBottom: '10px'}} label="ID gry" size="small"/>
+                    <RedButton onClick={joinToGame}>Dołącz</RedButton>
+                </div>
             </div>
 
 
