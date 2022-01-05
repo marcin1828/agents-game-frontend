@@ -6,14 +6,21 @@ import Tile from './../Tile/Tile';
 class TilesBoard extends React.Component {
 
     getTiles() {
-        const layout = {...this.props.layout};
+        const gameStatus = {...this.props.gameStatus};
         const images = {...this.props.images};
 
         let array = [];
-        if(layout !== undefined && images !== undefined) {
-            for (let i in layout['tiles']) {
-                let imageSrc = images[layout['tiles'][i]['imageNumber']+ '.jpg'];
-                array.push(<Tile key={'Tile' + layout['tiles'][i]['imageNumber']} img={imageSrc} color={layout['tiles'][i]['color']}/>)
+        if(gameStatus !== undefined && images !== undefined) {
+            for (let i in gameStatus['tiles']) {
+                let imageSrc = images[gameStatus['tiles'][i]['imageNumber']+ '.jpg'];
+                array.push(
+                    <Tile 
+                        key={'Tile' + gameStatus['tiles'][i]['imageNumber']} 
+                        imgNo={gameStatus['tiles'][i]['imageNumber']} 
+                        img={imageSrc} 
+                        color={gameStatus['tiles'][i]['color']}
+                    />
+                )
             }
         }
         return array;

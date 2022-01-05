@@ -1,7 +1,6 @@
 .TilesBoard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     width: calc(100% - 300px);
     margin: 25px 20px 0 20px;
 }

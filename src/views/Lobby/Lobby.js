@@ -42,7 +42,7 @@ const Lobby = () => {
     }
 
     const joinToGame = (team, role) => {
-        if(userName && userName.length > 0) {
+        if(userName && userName.length > 0 && !userId) {
             fetch(`http://${window.location.hostname}:8080/game/${gameId}/join`, {
                 method: 'POST',
                 headers: {
@@ -58,6 +58,12 @@ const Lobby = () => {
             .catch((error) => {
                 console.error('Join to game error: ', error);
             });
+        }
+    }
+
+    const startGame = () => {
+        if(gameId && userId) {
+            navigate('/game/' + gameId + '?uID=' + userId, { replace: true });
         }
     }
 
@@ -112,7 +118,7 @@ const Lobby = () => {
                     </div>
                 </div>
             </div>
-            <Button className={styles.playButton} variant="contained" color="success">GRAJ</Button>
+            <Button onClick={startGame} style={{marginTop: '35px', width: '150px'}} variant="contained" color="success">GRAJ</Button>
         </div>
     );
 }
