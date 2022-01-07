@@ -1,0 +1,25 @@
+@keyframes rollout {
+    0% { transform: translateY(-1000px); }
+    100% { transform: none; }
+}
+
+.tileContainer {
+    flex: 1 0 18%;
+    margin: 5px;
+    height: 170px;
+    width: calc(height * 3 / 2);
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: rollout 0.4s;
+}
+
+.colorImage {
+    height: 170px;
+    width: 15vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 70%;
+    border-radius: 8px;
+}

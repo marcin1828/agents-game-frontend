@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tile.css';
+import styles from './Tile.module.scss';
 import blueImage from './../../assets/images/blue.jpg';
 import redImage from './../../assets/images/red.jpg';
 import grayImage from './../../assets/images/gray.jpg';
@@ -7,11 +7,11 @@ import blackImage from './../../assets/images/black.jpg';
 import TileBox from '../TileBox/TileBox';
 
 
-const Tile = (props) => {
+const Tile = ({ img, imgNo, color, hint, open }) => {
 
     const handleClick = () => {
         const gameId = window.location.pathname.slice(6);
-        fetch(`http://${window.location.hostname}:8080/game/${gameId}/tile/color?imageNumber=${props.imgNo}`, {
+        fetch(`http://${window.location.hostname}:8080/game/${gameId}/tile/color?imageNumber=${imgNo}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -23,13 +23,13 @@ const Tile = (props) => {
     };
 
     return (
-        <div className="tile-container">
-            <TileBox handleClick={handleClick} img={props.img}/>
-            {props.color === "GRAY" ? <img className="color-image" src={grayImage} alt={grayImage}/> : ''}
-            {props.color === "RED" ? <img className="color-image" src={redImage} alt={redImage}/> : ''}
-            {props.color === "BLUE" ? <img className="color-image" src={blueImage} alt={blueImage}/> : ''}
-            {props.color === "BLACK" ? <img className="color-image" src={blackImage} alt={blackImage}/> : ''}
-        </div>      
+        <div className={styles.tileContainer}>
+            <TileBox handleClick={handleClick} img={img} borderColor={hint ? color : null}/>
+            {color === "GRAY" && open ? <img className={styles.colorImage} src={grayImage} alt={grayImage}/> : ''}
+            {color === "RED" && open ? <img className={styles.colorImage} src={redImage} alt={redImage}/> : ''}
+            {color === "BLUE" && open ? <img className={styles.colorImage} src={blueImage} alt={blueImage}/> : ''}
+            {color === "BLACK" && open ? <img className={styles.colorImage} src={blackImage} alt={blackImage}/> : ''}
+        </div>
     );
 }
 

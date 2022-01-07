@@ -13,11 +13,16 @@ const GameService = (props) => {
     const [images, setImages] = useState(null);
     const [imagesCount, setImagesCount] = useState(0);
     const [playerInfo, setPlayerInfo] = useState(null);
+    const [blueTeamPoints, setBlueTeamPoints] = useState(0);
+    const [redTeamPoints, setRedTeamPoints] = useState(0);
+
+
     const navigate = useNavigate();
 
     useEffect(() => {
         prepareImages();
-        initData();
+        const interval = initData();
+        return () => clearInterval(interval);
     }, []);
     
     const prepareImages = async () => {
@@ -29,9 +34,13 @@ const GameService = (props) => {
     const initData = async () => {
         const newPlayerId = window.location.search.slice(5);
         const newGameId = await getGameId();
-        await getGameStatus(newGameId);
-        await getPlayerInfo(newGameId, newPlayerId);
+        const newPlayerInfo = await getPlayerInfo(newGameId, newPlayerId);
+        const interval = setInterval(() => {
+            getGameStatus(newGameId, newPlayerInfo);
+        }, 500);
+        
         await getPlayerList(newGameId);
+        return interval;
     };
 
     const importAllImagesFromDirectory = r => {
@@ -40,8 +49,12 @@ const GameService = (props) => {
         return images;
     };
 
-    const getGameStatus = (newGameId) => {
-        fetch(`http://${window.location.hostname}:8080/game/${newGameId}/status/public`)
+    const getGameStatus = (newGameId, newPlayerInfo) => {
+        let url = `http://${window.location.hostname}:8080/game/${newGameId}/status/public`;
+        if(newPlayerInfo && newPlayerInfo.role === 'leader') {
+            url = `http://${window.location.hostname}:8080/game/${newGameId}/status/private`;
+        }
+        fetch(url)
         .then(response => response.json())
         .then(response => {
             setGameStatus(response);
@@ -63,9 +76,12 @@ const GameService = (props) => {
     };
     
     const getPlayerInfo = (newGameId, newPlayerId) => {
-        fetch(`http://${window.location.hostname}:8080/game/${newGameId}/status/player/${newPlayerId}`)
+        return fetch(`http://${window.location.hostname}:8080/game/${newGameId}/status/player/${newPlayerId}`)
         .then(response => response.json())
-        .then(response => setPlayerInfo(response));
+        .then(response => {
+            setPlayerInfo(response);
+            return response;
+        });
     };
 
     const getPlayerList = (newGameId) => {
@@ -78,8 +94,17 @@ const GameService = (props) => {
 
     return(
         <div className={styles.wrapper}>
-            <Menu />
-            <TilesBoard gameStatus={gameStatus} images={images}/>
+            <Menu
+                bluePoints={blueTeamPoints}
+                redPoints={redTeamPoints}
+                blueTilesLeft={gameStatus ? gameStatus.blueTilesLeft : ""}
+                redTilesLeft={gameStatus ? gameStatus.redTilesLeft : ""}
+            />
+            <TilesBoard 
+                gameStatus={gameStatus} 
+                images={images}
+                isLeader={playerInfo && playerInfo.role === 'leader' ? true : false}
+            />
         </div>
     );
 }

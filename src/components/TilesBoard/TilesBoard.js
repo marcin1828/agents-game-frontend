@@ -8,6 +8,7 @@ class TilesBoard extends React.Component {
     getTiles() {
         const gameStatus = {...this.props.gameStatus};
         const images = {...this.props.images};
+        const isLeader = this.props.isLeader;
 
         let array = [];
         if(gameStatus !== undefined && images !== undefined) {
@@ -19,12 +20,35 @@ class TilesBoard extends React.Component {
                         imgNo={gameStatus['tiles'][i]['imageNumber']} 
                         img={imageSrc} 
                         color={gameStatus['tiles'][i]['color']}
+                        hint={isLeader}
+                        open={gameStatus['tiles'][i]['open']}
                     />
                 )
             }
         }
         return array;
     }
+
+    // addTile() {
+    //         const gameStatus = {...this.props.gameStatus};
+    //         const images = {...this.props.images};
+    
+    //         let array = [];
+    //         if(gameStatus !== undefined && images !== undefined) {
+    //             for (let i in gameStatus['tiles']) {
+    //                 let imageSrc = images[gameStatus['tiles'][i]['imageNumber']+ '.jpg'];
+    //                 array.push(
+    //                     <Tile 
+    //                         key={'Tile' + gameStatus['tiles'][i]['imageNumber']} 
+    //                         imgNo={gameStatus['tiles'][i]['imageNumber']} 
+    //                         img={imageSrc} 
+    //                         color={gameStatus['tiles'][i]['color']}
+    //                     />
+    //                 )
+    //             }
+    //         }
+    //         return array;
+    //     }
 
     render() {
 
