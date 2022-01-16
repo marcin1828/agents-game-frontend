@@ -101,6 +101,7 @@ const GameService = (props) => {
             <Menu
                 bluePoints={blueTeamPoints}
                 redPoints={redTeamPoints}
+                players={players}
                 blueTilesLeft={gameStatus ? gameStatus.blueTilesLeft : ""}
                 redTilesLeft={gameStatus ? gameStatus.redTilesLeft : ""}
                 isActivePlayer={gameStatus && playerInfo && gameStatus.playingTeam === playerInfo.team && playerInfo.role === 'agent'}
