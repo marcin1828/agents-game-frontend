@@ -28,7 +28,7 @@ const TileBox = ({handleClick, img, borderColor}) => {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: '50% 50%',
             backgroundColor: 'white',
-            border: borderColor ? `6px solid ${getColor()}` : '2px solid black',
+            border: borderColor ? `10px solid ${getColor()}` : '2px solid black',
             borderRadius: '8px',
             '&:hover': borderColor ? "" : {
                 border: '3px solid black',

@@ -92,6 +92,10 @@ const GameService = (props) => {
         })
     };
 
+    const finishRound = () => {
+        console.log("round finished");
+    };
+
     return(
         <div className={styles.wrapper}>
             <Menu
@@ -99,6 +103,9 @@ const GameService = (props) => {
                 redPoints={redTeamPoints}
                 blueTilesLeft={gameStatus ? gameStatus.blueTilesLeft : ""}
                 redTilesLeft={gameStatus ? gameStatus.redTilesLeft : ""}
+                isActivePlayer={gameStatus && playerInfo && gameStatus.playingTeam === playerInfo.team && playerInfo.role === 'agent'}
+                finishRound={finishRound}
+                playingTeam={gameStatus ? gameStatus.playingTeam : null}
             />
             <TilesBoard 
                 gameStatus={gameStatus} 

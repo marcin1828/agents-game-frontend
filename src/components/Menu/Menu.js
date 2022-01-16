@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './Menu.module.scss';
 import logo from '../../assets/images/logo.png'
+import Button from '@mui/material/Button';
 
-const Menu = ({ bluePoints, redPoints, blueTilesLeft, redTilesLeft }) => (
+
+const Menu = ({ bluePoints, redPoints, blueTilesLeft, redTilesLeft, isActivePlayer, finishRound, playingTeam }) => (
     <div className={styles.Menu}>
         <img className={styles.logo} src={logo} alt="logo"/>
         
@@ -18,7 +20,16 @@ const Menu = ({ bluePoints, redPoints, blueTilesLeft, redTilesLeft }) => (
             <p className={styles.redTilesLeft}>{redTilesLeft}</p>
         </div>
 
-        <h2 className={styles.gameStatusInfo}>Gra drużyna niebieskich</h2>
+        {playingTeam && 
+            <h2 className={playingTeam === 'blue' ? styles.gameStatusInfoBlue : styles.gameStatusInfoRed}>
+                Gra drużyna {playingTeam === 'blue' ? 'niebieskich' : 'czerwonych'}
+            </h2>
+        }
+        
+
+        <div className={styles.buttonBar}>
+            {isActivePlayer && <Button onClick={(e) => finishRound()} style={{margin: '35px auto', width: '150px'}} variant="contained" color="primary">Koniec tury</Button>}
+        </div>
     </div>
 );
 
