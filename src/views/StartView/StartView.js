@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import styles from './StartView.module.scss';
-import logo from '../../assets/images/logo.png';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField }  from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import styles from './StartView.module.scss';
+import logo from '../../assets/images/logo.png';
+import InfoDialog from '../../components/InfoDialog/InfoDialog';
 
 
 const StartView = () => {
@@ -65,21 +66,7 @@ const StartView = () => {
             </div>
 
 
-            <Dialog
-                open={isDialogOpen}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">Błąd</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Gra o takim ID nie istnieje
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDialog(false)} autoFocus>OK</Button>
-                </DialogActions>
-            </Dialog>
+            <InfoDialog isOpen={isDialogOpen} title="Błąd" message="Gra o takim ID nie istnieje" closeDialog={() => setDialog(false)}/>
 
         </div>
     )
