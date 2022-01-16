@@ -91,7 +91,7 @@ const Lobby = () => {
         <div className={styles.wrapper}>
             <Link to="/"><img className={styles.logo} src={logo} alt='Logo Agents'/></Link>
             <p className={styles.p}>Cześć,</p>
-            <input onChange={(e) => setUserName(e.target.value)} className={styles.input} type="text" placeholder="Podaj imię" />
+            <input maxLength="15" onChange={(e) => setUserName(e.target.value)} className={styles.input} type="text" placeholder="Podaj imię" />
             <div className={styles.tiles}>
                 <div className={styles.bluePanel}>
                     <p className={styles.bold}>Szef wywiadu</p>
