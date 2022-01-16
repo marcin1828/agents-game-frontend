@@ -62,8 +62,12 @@ const Lobby = () => {
     }
 
     const startGame = () => {
-        if(gameId && userId) {
+        const url = new URL(window.location.href);
+        const userIdUrlParam = url.searchParams.get("uID");
+        if (gameId && userId) {
             navigate('/game/' + gameId + '?uID=' + userId, { replace: true });
+        } else if (gameId && userIdUrlParam) {
+            navigate('/game/' + gameId + '?uID=' + userIdUrlParam, { replace: true });
         }
     }
 
